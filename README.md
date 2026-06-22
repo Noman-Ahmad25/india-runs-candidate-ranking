@@ -7,7 +7,7 @@
 *Ranks 100,000+ resumes for a specialized AI Engineering role using a hybrid pipeline combining feature engineering, semantic search, and FAISS vector retrieval.*
 
 ![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white)
-![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)
+![Sentence Transformers](https://img.shields.io/badge/Sentence--Transformers-Embedding_Model-blue?style=flat-square)
 ![FAISS](https://img.shields.io/badge/FAISS-Vector_Search-0064B5?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-22C55E?style=flat-square)
 
@@ -35,8 +35,7 @@ This system solves that with a three-stage pipeline:
 | ⚡ **Scalable Retrieval** | FAISS delivers sub-second nearest-neighbour search over 100K+ vectors |
 | 🧠 **Hybrid Ranking** | 60% semantic similarity + 40% domain-specific feature score |
 | 📋 **Explainable Results** | Natural-language recruiter reasoning attached to every recommendation |
-| 📦 **Modular Pipeline** | Five decoupled stages — swap or extend any component independently |
-
+| 📦 **Modular Pipeline** | Feature extraction, embedding generation, indexing, ranking, and validation are separated into independent stages |
 ---
 ## 🏗️ Architecture
 
@@ -147,7 +146,6 @@ india-runs-candidate-ranking/
 | Language | Python 3.9+ |
 | Embeddings | `sentence-transformers` · `all-MiniLM-L6-v2` (384-dim) |
 | Vector Search | `faiss-cpu` |
-| Deep Learning | PyTorch |
 | NLP | Hugging Face Transformers |
 | Data Processing | NumPy · Scikit-learn |
 
