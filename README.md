@@ -1,100 +1,127 @@
-# India Runs Candidate Ranking
+# 🏃 India Runs — Candidate Ranking System
 
-AI-powered candidate discovery and ranking system built for the India Runs Data & AI Challenge.
+> AI-powered candidate discovery and ranking built for the **India Runs Data & AI Challenge**.  
+> Processes 100K+ resumes and surfaces the most relevant candidates for a target role using a hybrid pipeline combining semantic search, dense vector retrieval, and feature-engineered scoring.
 
-This project processes large-scale candidate datasets and identifies the most relevant candidates for a target role using a hybrid approach that combines semantic retrieval, vector search, and feature-engineered scoring.
+---
 
-## Features
+## ✨ Highlights
 
-- Semantic candidate search using Sentence Transformers
-- Dense vector retrieval using FAISS
-- Hybrid ranking (semantic similarity + feature-based scoring)
-- Candidate feature extraction and evaluation
-- Explainable candidate recommendations
-- Scalable pipeline designed for 100K+ resumes
+| | |
+|---|---|
+| 🔍 **Semantic Search** | Sentence Transformers (`all-MiniLM-L6-v2`) encode candidate profiles into dense embeddings |
+| ⚡ **Scalable Retrieval** | FAISS enables sub-second nearest-neighbour search over 100K+ vectors |
+| 🧠 **Hybrid Ranking** | Combines semantic similarity scores with domain-specific feature engineering |
+| 📋 **Explainable Results** | Recruiter-focused reasoning accompanies every top-ranked recommendation |
+| 📦 **Pipeline Ready** | Modular, end-to-end pipeline from raw profiles to a ranked `submission.csv` |
 
-## Tech Stack
+---
 
-- Python
-- FAISS
-- Sentence Transformers
-- Hugging Face Transformers
-- PyTorch
-- NumPy
-- Scikit-learn
-
-## Architecture
+## 🏗️ Architecture
 
 ```text
-Candidate Profiles
-        │
-        ▼
-Feature Extraction
-        │
-        ▼
-Embedding Generation
-(all-MiniLM-L6-v2)
-        │
-        ▼
-FAISS Vector Index
-        │
-        ▼
-Semantic Retrieval
-        │
-        ▼
-Hybrid Ranking
-(Semantic + Feature Scores)
-        │
-        ▼
-Top Candidate Selection
+┌─────────────────────────────────────┐
+│          Candidate Profiles         │
+│          (candidates.jsonl)         │
+└────────────────┬────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────┐
+│          Feature Extraction         │
+│       (feature_extractor.py)        │
+│  Skills · Experience · Education    │
+└────────────────┬────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────┐
+│        Embedding Generation         │
+│   (process_candidate_embeddings.py) │
+│    all-MiniLM-L6-v2 · 384-dim       │
+└────────────────┬────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────┐
+│          FAISS Vector Index         │
+│           (faiss_index.py)          │
+│   IndexFlatIP · Metadata Store      │
+└────────────────┬────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────┐
+│         Semantic Retrieval          │
+│      Top-K nearest neighbours       │
+└────────────────┬────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────┐
+│           Hybrid Ranking            │
+│             (rank.py)               │
+│  α · Semantic + β · Feature Score   │
+└────────────────┬────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────┐
+│       Ranked Submission File        │
+│          (submission.csv)           │
+└─────────────────────────────────────┘
 ```
 
-## Project Highlights
+---
 
-- Processed and ranked candidates from a dataset containing over 100,000 resumes.
-- Built a hybrid ranking framework combining dense vector similarity and domain-specific feature engineering.
-- Leveraged Sentence Transformers (all-MiniLM-L6-v2) to generate semantic embeddings for candidate profiles.
-- Used FAISS for efficient large-scale vector retrieval.
-- Generated explainable candidate recommendations with recruiter-focused reasoning.
-
-## Project Structure
+## 📁 Project Structure
 
 ```text
-.
-├── src/
-│   ├── feature_extractor.py
-│   ├── process_candidate_embeddings.py
-│   ├── faiss_index.py
-│   └── rank.py
+india-runs-candidate-ranking/
 │
-├── candidate_schema.json
-├── sample_candidates.json
-├── requirements.txt
-├── validate_submission.py
+├── src/
+│   ├── feature_extractor.py            # Extracts structured features from profiles
+│   ├── process_candidate_embeddings.py # Generates sentence embeddings
+│   ├── faiss_index.py                  # Builds and serialises the FAISS index
+│   └── rank.py                         # Hybrid ranking + submission output
+│
+├── candidate_schema.json               # Schema definition for candidate profiles
+├── sample_candidates.json              # Sample data for local testing
+├── requirements.txt                    # Python dependencies
+├── validate_submission.py              # Validates submission format
 └── README.md
 ```
 
-## Installation
+---
+
+## 🛠️ Tech Stack
+
+| Component | Technology |
+|---|---|
+| Language | Python 3.9+ |
+| Embeddings | `sentence-transformers` · `all-MiniLM-L6-v2` |
+| Vector Search | `faiss-cpu` |
+| ML Framework | PyTorch · Hugging Face Transformers |
+| Numerics | NumPy · Scikit-learn |
+
+---
+
+## ⚙️ Installation
 
 ```bash
 git clone https://github.com/your-username/india-runs-candidate-ranking.git
 cd india-runs-candidate-ranking
 
 python3 -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
 
 pip install -r requirements.txt
 ```
 
-## Model Setup
+---
 
-This project uses the **all-MiniLM-L6-v2** Sentence Transformer model.
+## 🤖 Model Setup
 
-Download the model from:
+This project uses **`all-MiniLM-L6-v2`** from Sentence Transformers — a compact, fast model that produces high-quality 384-dimensional semantic embeddings.
 
-https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
+**Download from Hugging Face:**  
+👉 https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
 
-Create a directory named `local_model` in the project root and place the downloaded model files inside:
+Place the downloaded model files in a `local_model/` directory at the project root:
 
 ```text
 local_model/
@@ -105,38 +132,48 @@ local_model/
 ├── tokenizer_config.json
 ├── vocab.txt
 └── 1_Pooling/
+    └── config.json
 ```
 
-The `local_model/` directory is excluded from version control because of its size.
+> `local_model/` is excluded from version control due to file size.
 
-## Usage
+---
 
-### Generate Embeddings
+## 🚀 Usage
+
+Run the pipeline in three steps:
+
+### 1. Generate Embeddings
+
+Encodes all candidate profiles into dense vectors.
 
 ```bash
 python3 src/process_candidate_embeddings.py
 ```
 
-Output:
+**Output:** `candidate_embeddings.jsonl`
 
-```text
-candidate_embeddings.jsonl
-```
+---
 
-### Build FAISS Index
+### 2. Build FAISS Index
+
+Constructs and serialises the vector index for fast retrieval.
 
 ```bash
 python3 src/faiss_index.py
 ```
 
-Outputs:
-
+**Outputs:**
 ```text
-candidates.index
-faiss_metadata.pkl
+candidates.index      # FAISS binary index
+faiss_metadata.pkl    # Candidate ID → metadata mapping
 ```
 
-### Generate Final Rankings
+---
+
+### 3. Generate Rankings
+
+Runs hybrid ranking over retrieved candidates and writes the submission file.
 
 ```bash
 python3 src/rank.py \
@@ -144,46 +181,43 @@ python3 src/rank.py \
   --out submission.csv
 ```
 
-Output:
+**Output:** `submission.csv`
 
-```text
-submission.csv
-```
+---
 
-### Validate Submission
+### 4. Validate Submission
 
 ```bash
 python3 validate_submission.py submission.csv
 ```
 
-## Results
+---
 
-- Ranked candidates from a pool of 100K+ resumes.
-- Combined semantic retrieval with recruiter-oriented feature scoring.
-- Produced explainable recommendations for top-ranked candidates.
-- Enabled scalable candidate discovery using vector search and hybrid ranking.
+## 📊 Results
 
-## Repository Notes
+- ✅ Ranked candidates from a pool of **100,000+ resumes**
+- ✅ Hybrid scoring fused semantic similarity with recruiter-oriented feature signals
+- ✅ Produced **explainable, natural-language recommendations** for each top candidate
+- ✅ Sub-second retrieval latency at scale via FAISS vector indexing
 
-The following files are excluded from the repository:
+---
 
-- Original challenge dataset (`candidates.jsonl`)
-- Generated embeddings (`candidate_embeddings.jsonl`)
-- FAISS index files (`candidates.index`, `faiss_metadata.pkl`)
-- Generated ranking outputs
-- Local model weights (`local_model/`)
+## 🗂️ Repository Notes
 
-These artifacts are omitted due to storage and licensing constraints.
+The following large or licensed files are excluded from version control:
 
-## Resume Highlights
+| File / Directory | Reason Excluded |
+|---|---|
+| `candidates.jsonl` | Original challenge dataset (licensing) |
+| `candidate_embeddings.jsonl` | Generated artefact (size) |
+| `candidates.index` | Generated artefact (size) |
+| `faiss_metadata.pkl` | Generated artefact (size) |
+| `submission.csv` | Generated output |
+| `local_model/` | Model weights (size) |
 
-- Built an AI-powered candidate ranking system to process and rank 100K+ resumes using semantic retrieval and feature-engineered scoring.
-- Developed a hybrid ranking pipeline combining Sentence Transformers, FAISS vector search, and recruiter-focused candidate evaluation.
-- Engineered scalable embedding and retrieval workflows for large-scale talent discovery.
-- Generated explainable candidate recommendations through semantic matching and domain-specific ranking signals.
+---
 
-## License
+## 📄 License
 
-This project is licensed under the MIT License.
-
+This project is licensed under the **MIT License**.  
 See the [LICENSE](LICENSE) file for details.
