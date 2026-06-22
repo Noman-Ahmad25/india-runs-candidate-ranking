@@ -12,11 +12,6 @@ __pycache__/
 
 # Generated Outputs
 submission.csv
-final_ranked_leaderboard.jsonl
-
-# FAISS Artifacts
-candidates.index
-faiss_metadata.pkl
 
 # Embeddings
 candidate_embeddings.jsonl
@@ -24,12 +19,11 @@ candidate_embeddings.jsonl
 # Competition Dataset
 candidates.jsonl
 
-# Local Models
-local_model/
 
 # IDE
 .vscode/
 .idea/
+.gradio/
 
 # OS Files
 .DS_Store

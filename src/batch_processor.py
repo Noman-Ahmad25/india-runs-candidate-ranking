@@ -5,6 +5,8 @@ from typing import Dict, Any
 
 from feature_extractor import extract_candidate_features
 
+
+
 def process_large_jsonl_safely(input_path: str, output_path: str, batch_size: int = 5000):
     """
     Streams large resume logs, safely increments records, patches zero-division bugs,
@@ -14,7 +16,7 @@ def process_large_jsonl_safely(input_path: str, output_path: str, batch_size: in
     processed_count = 0
     error_count = 0
 
-    print("🚀 Initializing Robust Processing Pipeline for 100,000 Records...")
+    print("🚀 Initializing Robust Processing Pipeline")
 
     try:
         with open(input_path, 'r', encoding='utf-8') as infile, \
@@ -39,6 +41,7 @@ def process_large_jsonl_safely(input_path: str, output_path: str, batch_size: in
                     error_count += 1
                 except Exception as e:
                     error_count += 1
+                   
                     # Un-comment the next lines if you need to catch raw field structural anomalies
                     # if error_count <= 5:
                     #     print(f"Structural anomaly detected on line {line_idx}: {str(e)}")
