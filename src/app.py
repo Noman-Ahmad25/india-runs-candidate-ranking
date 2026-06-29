@@ -18,7 +18,12 @@ def run_ranking():
             "Error": ["Ranking failed. Check logs."]
         })
 
-    df = pd.read_csv("submission.csv")
+    try:
+        df = pd.read_csv("submission.csv")
+    except FileNotFoundError:
+        return pd.DataFrame({
+            "Error": ["submission.csv not found."]
+        })
 
     return df[
         ["rank", "candidate_id", "score", "reasoning"]
