@@ -12,22 +12,17 @@ def process_candidate_embeddings(input_file: str, output_file: str):
     device = "mps" if torch.backends.mps.is_available() else "cpu"
 
     print(f"🚀 Initializing SentenceTransformer on: {device.upper()}")
-    
     model = SentenceTransformer("local_model", device=device)
-    
     processed_count = 0
     start_time = time.time()
 
     with open(input_file, 'r', encoding='utf-8') as infile, \
          open(output_file, 'w', encoding='utf-8') as outfile:
-        
         for line in infile:
             if not line.strip(): continue
-            
             candidate = json.loads(line)
             candidate_id = candidate.get("candidate_id")
             chunks = []
-            
             # --- 1. Identity Chunk ---
             profile = candidate.get("profile", {})
             headline = profile.get("headline", "")
