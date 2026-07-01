@@ -1,0 +1,59 @@
+team_name: "NexaTech"
+
+primary_contact:
+  name: "Noman Ahmad"
+  email: "nomanahmad9356@gmail.com"
+  phone: "+91-9356380208"
+
+team_members:
+  - name: "Noman Ahmad"
+    email: "nomanahmad9356@gmail.com"
+    role: "Team Lead"
+
+  - name: "Abdul Samad"
+    email: "abdulsamad9040474@gmail.com"
+    role: "Software Engineer"
+
+github_repo: "https://github.com/Noman-Ahmad25/india-runs-candidate-ranking"
+
+sandbox_link: "https://huggingface.co/spaces/Noman-Ahmad25/india-runs-candidate-ranking"
+
+reproduce_command: "python src/run_pipeline.py"
+
+compute:
+  platform: "Local macOS"
+  cpu_cores: 10
+  ram_gb: 16
+  python_version: "3.11"
+  os: "macOS"
+  uses_gpu_for_inference: false
+  has_network_during_ranking: false
+  pre_computation_required: true
+  pre_computation_time_minutes: 25
+
+ai_tools_used:
+  - "Google Gemini"
+  - "ChatGPT"
+
+ai_usage_summary: |
+  Google Gemini was used for code generation, implementation assistance, and code optimization.
+  ChatGPT was used for architecture discussions, debugging, documentation, README preparation,
+  presentation refinement, and technical review. The feature engineering pipeline, semantic
+  retrieval workflow, and hybrid ranking logic were designed, implemented, and integrated by the team.
+
+methodology_summary: |
+  Challenge-specific hybrid candidate ranking system combining handcrafted feature
+  engineering with semantic retrieval. Candidate profiles are scored using manually
+  engineered recruitment heuristics derived from the provided AI Engineering job
+  description. Sentence Transformers generate semantic embeddings that are indexed
+  with FAISS for efficient similarity search. Final ranking combines semantic
+  similarity (60%) and feature score (40%) to produce deterministic rankings and
+  recruiter-friendly explanations. The implementation is optimized for the
+  challenge's AI Engineering role rather than arbitrary job descriptions.
+
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: true
