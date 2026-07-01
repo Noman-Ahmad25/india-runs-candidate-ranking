@@ -27,4 +27,5 @@ candidates.jsonl
 
 # OS Files
 .DS_Store
-Thumbs.db.jetro/ 
+Thumbs.db
+.jetro/ 
